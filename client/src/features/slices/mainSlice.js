@@ -9,7 +9,7 @@ import {
 } from "./userSlice";
 import { getAllPost } from "./postSlice";
 
-export const url = "http://localhost:5000";
+export const url = " http://localhost:5000";
 
 const initialState = {
   user: null,

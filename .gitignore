@@ -13,8 +13,6 @@ build
 
 # misc
 /server/.env
-
-/client/.env
 .DS_Store
 .env.local
 .env.development.local
