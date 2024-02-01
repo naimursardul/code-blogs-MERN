@@ -19,7 +19,8 @@ const Navbar = () => {
       navigate(`?search=${searchPrompt}`);
       dispatch(getAllPost("?search=" + searchPrompt));
     } else {
-      navigate(), dispatch(getAllPost(""));
+      navigate();
+      dispatch(getAllPost(""));
     }
   }, [searchPrompt, navigate, pathname, dispatch]);
 

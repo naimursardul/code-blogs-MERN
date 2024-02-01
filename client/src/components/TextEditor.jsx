@@ -18,7 +18,7 @@ const TextEditor = ({ props }) => {
 
         // console.log(quill.getContents());
       });
-  }, [quill]);
+  }, [quill, desc]);
 
   //   Quill setup
   const wrapper = useRef();
@@ -35,7 +35,7 @@ const TextEditor = ({ props }) => {
         wrapper.current.innerHTML = "";
       }
     };
-  }, [TOOLBAR_OPTIONS]);
+  }, []);
 
   return (
     <div

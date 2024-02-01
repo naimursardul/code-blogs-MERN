@@ -3,7 +3,7 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import { TiDelete } from "react-icons/ti";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import { url } from "../features/slices/mainSlice";

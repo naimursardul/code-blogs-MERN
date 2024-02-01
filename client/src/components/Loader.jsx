@@ -7,5 +7,3 @@ const Loader = () => {
 };
 
 export default Loader;
-
-Loader.js;
