@@ -3,6 +3,7 @@ import Post from "../models/post.js";
 import multer from "multer";
 import path from "path";
 import dotenv from "dotenv";
+import fs from "fs/promises";
 
 dotenv.config();
 
@@ -29,6 +30,41 @@ export const updatePost = async (req, res) => {
   }
 };
 
+// // DELETE file
+// export const deleteFile = async (req, res) => {
+//   try {
+//     const photoUrl = req.body.imageUrl;
+//     const fileName = photoUrl.replace(
+//       `${process.env.BACKEND_URL}${process.env.UPLOADS_ROUTE}/`,
+//       ""
+//     );
+//     const directoryName = path.join(process.env.UPLOADS_DIRECTORY, fileName);
+//     await fs.unlink(directoryName);
+//     res.status(200).json({ message: "Successfully Deleted!" });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json(error);
+//   }
+// };
+
+// DELETE file from selected post
+export const deletePostFile = async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    const photoUrl = post?.photo;
+    const fileName = photoUrl.replace(
+      `${process.env.BACKEND_URL}${process.env.UPLOADS_ROUTE}/`,
+      ""
+    );
+    const directoryName = path.join(process.env.UPLOADS_DIRECTORY, fileName);
+    await fs.unlink(directoryName);
+    next();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
 // DELETE POST
 export const deletePost = async (req, res) => {
   try {
@@ -36,9 +72,20 @@ export const deletePost = async (req, res) => {
     await Comment.deleteMany({ postId: req.params.id });
     res.status(200).json({ message: "Post has been deleted successfully!" });
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };
+// // DELETE POST
+// export const deletePost = async (req, res) => {
+//   try {
+//     await Post.findByIdAndDelete(req.params.id);
+//     await Comment.deleteMany({ postId: req.params.id });
+//     res.status(200).json({ message: "Post has been deleted successfully!" });
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// };
 
 // GET A POST DETAILS
 export const getSinglePost = async (req, res) => {
@@ -80,7 +127,7 @@ export const getAllPost = async (req, res) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, process.env.UPLOADS_URL);
+    cb(null, process.env.UPLOADS_DIRECTORY);
   },
   filename: (req, file, cb) => {
     const fileExt = path.extname(file.originalname);

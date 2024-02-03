@@ -9,7 +9,8 @@ import {
 } from "./userSlice";
 import { getAllPost } from "./postSlice";
 
-export const url = "https://code-blogs.onrender.com";
+// export const url = "https://code-blogs.onrender.com";
+export const url = "http://localhost:5000";
 
 const initialState = {
   user: null,

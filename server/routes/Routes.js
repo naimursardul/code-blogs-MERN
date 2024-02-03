@@ -7,12 +7,14 @@ import {
 } from "../controllers/authController.js";
 import {
   deleteUser,
+  deleteUserAllFile,
   getSingleUser,
   updateUser,
 } from "../controllers/userController.js";
 import {
   createPost,
   deletePost,
+  deletePostFile,
   getAllPost,
   getSinglePost,
   getUserPost,
@@ -36,16 +38,26 @@ route.get("/logout", logOutUser); // LOGOUT USER
 route.get("/refetch", refetchUser); // REFETCH USER
 
 route.put("/user/:id", verifyToken, updateUser); // UPDATE USER
-route.delete("/user/:id", verifyToken, deleteUser); // DELETE USER
+route.delete("/user/:id", verifyToken, deleteUserAllFile, deleteUser); // DELETE USER
 route.get("/user/:id", getSingleUser); // GET USER
 
 route.post("/post/write", createPost); // CREATE POST
-route.put("/post/:id", verifyToken, updatePost); // UPDATE POST
-route.delete("/post/:id", verifyToken, deletePost); // DELETE POST
+route.put(
+  "/post/:id",
+  verifyToken,
+  (req, res, next) => {
+    if (req.body.photo) {
+      deletePostFile(req, res, next);
+    } else next();
+  },
+  updatePost
+); // UPDATE POST
+route.delete("/post/:id", verifyToken, deletePostFile, deletePost); // DELETE POST
 route.get("/post/:id", getSinglePost); // GET A POST DETAILS
 route.get("/post/user/:userId", getUserPost); // GET ALL POSTS FROM SINGLE USER
 route.get("/post", getAllPost); // GET ALL + Searched POSTS
-route.post("/upload", upload.single("file"), uploadFile);
+route.post("/upload", upload.single("file"), uploadFile); // UPLOAD FILES
+// route.delete("/upload", deleteFile); // DELETE UPLOADED FILES
 
 route.post("/comment", verifyToken, createComment); // CREATE COMMENT
 route.put("/comment/:id", verifyToken, updateComment); // UPDATE COMMENT

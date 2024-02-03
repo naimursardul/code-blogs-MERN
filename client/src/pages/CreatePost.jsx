@@ -18,13 +18,14 @@ const CreatePost = () => {
   const { user } = useSelector((state) => state.mainReducer);
   const [cat, setCat] = useState("");
   const [cats, setCats] = useState([]);
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [shortDesc, setShortDesc] = useState("");
+  const [title, setTitle] = useState();
+  const [desc, setDesc] = useState();
+  const [shortDesc, setShortDesc] = useState();
   const [file, setFile] = useState(null);
   const [uploadError, setUploadError] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const errMsg1 = "Please! Fill out the required fields.";
   const postData = {
     title,
     shortDesc,
@@ -61,7 +62,7 @@ const CreatePost = () => {
     //
     //
     //
-    if (file) {
+    if (title && shortDesc && desc && file) {
       const formData = new FormData();
       formData.append("file", file);
 
@@ -73,14 +74,18 @@ const CreatePost = () => {
         });
         const result = res.data;
         postData.photo = result.imageUrl;
+        setUploadError(null);
       } catch (error) {
         setUploadError(error);
       }
+    } else {
+      return setError(errMsg1);
     }
     //
     //
     //
-    if (!uploadError && postData.photo) {
+    console.log(postData);
+    if (postData.photo) {
       postData.done = isDone;
       setLoading(true);
       try {
@@ -192,7 +197,9 @@ const CreatePost = () => {
             <div className="mt-1 gap-1 flex text-center justify-center items-start text-red-600">
               <MdErrorOutline className="text-lg pt-[1px] md:pt-1" />
               <div className="md:text-sm text-[12px]">
-                Oops! There is a problem uploading the post.
+                {error === errMsg1
+                  ? errMsg1
+                  : "Oops! There is a problem uploading the post."}
               </div>
             </div>
           )}

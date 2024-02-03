@@ -81,6 +81,7 @@ const UpdatePost = () => {
   //
   //
   // UPDATE POST
+  let isContinue = true;
   const handleSubmit = async (isDone) => {
     //
     //
@@ -96,15 +97,17 @@ const UpdatePost = () => {
           },
         });
         const result = res.data;
+        setUploadError(null);
         postData.photo = result.imageUrl;
       } catch (error) {
+        isContinue = false;
         setUploadError(error);
       }
     }
     //
     //
     //
-    if (!uploadError) {
+    if (isContinue) {
       postData.done = isDone;
       setLoading(true);
       try {
@@ -145,7 +148,11 @@ const UpdatePost = () => {
           </div>
           {/* File upload */}
           <div>
-            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+            <input
+              type="file"
+              // onClick={() => setUploadError(null)}
+              onChange={(e) => setFile(e.target.files[0])}
+            />
             {uploadError && (
               <div className="mt-1 flex gap-1 text-center justify-start items-start text-red-600">
                 <MdErrorOutline className="text-lg pt-[1px] md:pt-1" />

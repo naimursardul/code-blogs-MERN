@@ -9,7 +9,7 @@ const ProfilePost = ({ uPost }) => {
         <h1 className="font-semibold md:text-2xl lg:text-3xl sm:text-xl text-lg leading-6 md:leading-7">
           {uPost?.title}
         </h1>
-        <div className="flex justify-between text-[10px] md:text-[12px] lg:text-[14px] ">
+        <div className="flex justify-between text-[10px] sm:text-[12px] text-gray-500 ">
           <p>@{uPost?.username}</p>
           <div className="flex gap-[10px]">
             <p>{new Date(uPost?.createdAt).toString().slice(0, 15)}</p>

@@ -10,7 +10,7 @@ const HomePost = ({ post }) => {
         <h1 className="font-bold md:text-2xl lg:text-3xl sm:text-xl text-lg ">
           {title}
         </h1>
-        <div className="flex justify-between text-[10px] md:text-[12px] lg:text-[14px] ">
+        <div className="flex justify-between text-[10px] sm:text-[12px] text-gray-500 ">
           <p>@{username.toLowerCase()}</p>
           <div className="flex gap-[10px]">
             <p>{new Date(createdAt).toString().slice(0, 15)}</p>
