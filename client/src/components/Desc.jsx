@@ -6,23 +6,23 @@ const Desc = ({ desc }) => {
   const [quill, setQuill] = useState();
 
   useEffect(() => {
-    // if (quill === null) return;
     quill && quill.setContents(desc);
-  }, [quill]);
+  }, [quill, desc]);
 
   //   Quill setup
   const wrapper = useRef();
   useEffect(() => {
     const editor = document.createElement("div");
-    wrapper.current.append(editor);
+    const element = wrapper.current;
+    element.append(editor);
     const q = new Quill(editor, {
       theme: "snow",
     });
     setQuill(q);
     q.disable();
     return () => {
-      if (wrapper.current) {
-        wrapper.current.innerHTML = "";
+      if (element) {
+        element.innerHTML = "";
       }
     };
   }, []);

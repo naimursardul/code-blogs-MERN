@@ -15,24 +15,23 @@ const TextEditor = ({ props }) => {
     quill &&
       quill.on("text-change", () => {
         setDesc(quill.getContents());
-
-        // console.log(quill.getContents());
       });
-  }, [quill, desc]);
+  }, [quill, desc, setDesc, isUpdate]);
 
   //   Quill setup
   const wrapper = useRef();
   useEffect(() => {
     const editor = document.createElement("div");
-    wrapper.current.append(editor);
+    const element = wrapper.current;
+    element.append(editor);
     const q = new Quill(editor, {
       theme: "snow",
       modules: { toolbar: TOOLBAR_OPTIONS },
     });
     setQuill(q);
     return () => {
-      if (wrapper.current) {
-        wrapper.current.innerHTML = "";
+      if (element) {
+        element.innerHTML = "";
       }
     };
   }, []);

@@ -84,7 +84,6 @@ const CreatePost = () => {
     //
     //
     //
-    console.log(postData);
     if (postData.photo) {
       postData.done = isDone;
       setLoading(true);
