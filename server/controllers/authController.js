@@ -33,7 +33,10 @@ export const loginUser = async (req, res) => {
         const token = jwt.sign(newUser._doc, process.env.SECRET, {
           expiresIn: "3d",
         });
-        res.cookie("token", token).status(200).json(newUser);
+        res
+          .cookie("token", token, { sameSite: "none" })
+          .status(200)
+          .json(newUser);
       } else {
         res.status(401).json({ message: "Wrong Password!" });
       }

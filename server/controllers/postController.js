@@ -76,16 +76,6 @@ export const deletePost = async (req, res) => {
     res.status(500).json(error);
   }
 };
-// // DELETE POST
-// export const deletePost = async (req, res) => {
-//   try {
-//     await Post.findByIdAndDelete(req.params.id);
-//     await Comment.deleteMany({ postId: req.params.id });
-//     res.status(200).json({ message: "Post has been deleted successfully!" });
-//   } catch (error) {
-//     res.status(500).json(error);
-//   }
-// };
 
 // GET A POST DETAILS
 export const getSinglePost = async (req, res) => {

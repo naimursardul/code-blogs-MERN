@@ -41,7 +41,7 @@ route.put("/user/:id", verifyToken, updateUser); // UPDATE USER
 route.delete("/user/:id", verifyToken, deleteUserAllFile, deleteUser); // DELETE USER
 route.get("/user/:id", getSingleUser); // GET USER
 
-route.post("/post/write", createPost); // CREATE POST
+route.post("/post/write", verifyToken, createPost); // CREATE POST
 route.put(
   "/post/:id",
   verifyToken,
