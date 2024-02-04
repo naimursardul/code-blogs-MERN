@@ -23,6 +23,10 @@ export const loginUser = createAsyncThunk(
     try {
       const res = await axios.post(url + "/login", info, {
         withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
       });
       const result = res.data;
       return result;

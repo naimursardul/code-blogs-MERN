@@ -54,10 +54,8 @@ export const deletePostFile = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
     const photoUrl = post?.photo;
-    const fileName = photoUrl.replace(
-      `${process.env.BACKEND_URL}${process.env.UPLOADS_ROUTE}/`,
-      ""
-    );
+    const fileName = photoUrl.split("/uploads/")[1];
+    console.log(fileName);
     const directoryName = path.join(process.env.UPLOADS_DIRECTORY, fileName);
     await fs.unlink(directoryName);
     next();

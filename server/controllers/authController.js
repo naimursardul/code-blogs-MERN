@@ -34,7 +34,11 @@ export const loginUser = async (req, res) => {
           expiresIn: "3d",
         });
         res
-          .cookie("token", token, { sameSite: "none" })
+          .cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+          })
           .status(200)
           .json(newUser);
       } else {
