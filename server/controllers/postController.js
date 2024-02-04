@@ -14,6 +14,7 @@ export const createPost = async (req, res) => {
     await createdPost.save();
     res.status(200).json(createdPost);
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };
@@ -26,6 +27,7 @@ export const updatePost = async (req, res) => {
     });
     res.status(200).json(updatedPost);
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };
@@ -81,8 +83,10 @@ export const deletePost = async (req, res) => {
 export const getSinglePost = async (req, res) => {
   try {
     const singlePost = await Post.findById(req.params.id);
+    console.log(singlePost);
     res.status(200).json(singlePost);
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };
