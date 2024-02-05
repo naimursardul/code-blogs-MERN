@@ -19,7 +19,8 @@ import Error from "./components/Error";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (findCookie("token")) dispatch(refetchUser());
+    // if (findCookie("token")) dispatch(refetchUser());
+    dispatch(refetchUser());
   }, [dispatch]);
 
   return (
