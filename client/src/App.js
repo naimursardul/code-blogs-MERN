@@ -20,6 +20,8 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     // if (findCookie("token")) dispatch(refetchUser());
+    if (findCookie("token")) console.log(findCookie("token"));
+    console.log(findCookie("token"));
     dispatch(refetchUser());
   }, [dispatch]);
 
