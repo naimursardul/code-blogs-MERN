@@ -18,11 +18,12 @@ import Error from "./components/Error";
 
 function App() {
   const dispatch = useDispatch();
-  const token = findCookie("token");
+  const token = findCookie("token") && findCookie("token");
+  console.log(token);
   useEffect(() => {
     token && dispatch(refetchUser());
     console.log(findCookie("token"));
-    dispatch(refetchUser());
+    // dispatch(refetchUser());
   }, [dispatch, token]);
 
   return (
