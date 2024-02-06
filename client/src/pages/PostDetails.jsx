@@ -48,11 +48,13 @@ const PostDetails = () => {
       setPostDetails(result);
     } catch (error) {
       setError(error);
+      console.log("error");
       console.log(error);
       setLoading(false);
     }
   };
   useEffect(() => {
+    console.log(id);
     getPostDetails(id);
     getAllComments(id);
   }, [id]);
