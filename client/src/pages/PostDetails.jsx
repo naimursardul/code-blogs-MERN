@@ -17,6 +17,7 @@ import Desc from "../components/Desc";
 //
 const PostDetails = () => {
   const id = useParams().id;
+  console.log(id);
   const { user } = useSelector((state) => state.mainReducer);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -47,7 +48,6 @@ const PostDetails = () => {
       setPostDetails(result);
     } catch (error) {
       setError(error);
-      console.log("error");
       console.log(error);
       setLoading(false);
     }
