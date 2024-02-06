@@ -14,7 +14,6 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { refetchUser } from "./features/slices/userSlice";
 import Error from "./components/Error";
-import { findCookie } from "./features/helper/helper";
 
 function App() {
   const dispatch = useDispatch();
