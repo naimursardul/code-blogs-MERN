@@ -12,19 +12,22 @@ import UpdatePost from "./pages/UpdatePost";
 import Profile from "./pages/Profile";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { findCookie } from "./features/helper/helper";
 import { refetchUser } from "./features/slices/userSlice";
 import Error from "./components/Error";
 
 function App() {
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   const cookies = document.cookie || "";
+  //   const cookie = cookies
+  //     .split("; ")
+  //     .find((cookie) => cookie.startsWith(`${cookieName}=`));
+  //   setToken
+  //   }, []);
+
   useEffect(() => {
-    const fetchData = async () => {
-      const token = await findCookie("token");
-      token && dispatch(refetchUser());
-      console.log(token);
-    };
-    fetchData();
+    dispatch(refetchUser());
   }, [dispatch]);
 
   return (
