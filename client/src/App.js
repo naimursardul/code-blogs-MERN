@@ -18,13 +18,14 @@ import Error from "./components/Error";
 
 function App() {
   const dispatch = useDispatch();
-  console.log(token);
   useEffect(() => {
-    const token = findCookie("token") && findCookie("token");
-    token && dispatch(refetchUser());
-    console.log(findCookie("token"));
-    // dispatch(refetchUser());
-  }, [dispatch, token]);
+    const fetchData = async () => {
+      const token = await findCookie("token");
+      token && dispatch(refetchUser());
+      console.log(token);
+    };
+    fetchData();
+  }, [dispatch]);
 
   return (
     <div>
