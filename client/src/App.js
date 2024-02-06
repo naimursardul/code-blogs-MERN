@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -18,17 +18,19 @@ import Error from "./components/Error";
 function App() {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const cookies = document.cookie || "";
-  //   const cookie = cookies
-  //     .split("; ")
-  //     .find((cookie) => cookie.startsWith(`${cookieName}=`));
-  //   setToken
-  //   }, []);
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    const cookies = document.cookie || "";
+    const cookie = cookies
+      .split("; ")
+      .find((cookie) => cookie.startsWith("token"));
+    setToken(cookie);
+  }, []);
 
   useEffect(() => {
+    console.log(token);
     dispatch(refetchUser());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   return (
     <div>
