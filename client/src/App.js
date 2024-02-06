@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -14,23 +14,14 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { refetchUser } from "./features/slices/userSlice";
 import Error from "./components/Error";
+import { findCookie } from "./features/helper/helper";
 
 function App() {
   const dispatch = useDispatch();
 
-  const [token, setToken] = useState("");
   useEffect(() => {
-    const cookies = document.cookie || "";
-    const cookie = cookies
-      .split("; ")
-      .find((cookie) => cookie.startsWith("token"));
-    setToken(cookie);
-  }, []);
-
-  useEffect(() => {
-    console.log(token);
-    dispatch(refetchUser());
-  }, [dispatch, token]);
+    findCookie("token") && dispatch(refetchUser());
+  }, [dispatch]);
 
   return (
     <div>
