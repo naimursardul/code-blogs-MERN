@@ -88,7 +88,9 @@ const CreatePost = () => {
       postData.done = isDone;
       setLoading(true);
       try {
-        const res = await axios.post(url + "/post/write", postData);
+        const res = await axios.post(url + "/post/write", postData, {
+          withCredentials: true,
+        });
         const result = res.data;
         isDone
           ? navigate("/post/" + result._id)
