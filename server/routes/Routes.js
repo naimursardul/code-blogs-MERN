@@ -48,7 +48,8 @@ route.put(
   (req, res, next) => {
     if (req.body.photo) {
       deletePostFile(req, res, next);
-    } else next();
+    }
+    next();
   },
   updatePost
 ); // UPDATE POST
