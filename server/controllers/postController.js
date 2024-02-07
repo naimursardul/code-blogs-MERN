@@ -60,7 +60,6 @@ export const deletePostFile = async (req, res, next) => {
     await fs.unlink(directoryName);
     next();
   } catch (error) {
-    next();
     console.log(error);
     res.status(500).json(error);
   }
